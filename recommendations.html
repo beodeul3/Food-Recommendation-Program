@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendations</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1, h2 {
+            color: #007bff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .food-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 폭 설정 */
+            height: auto; /* 가로 세로 비율 유지 */
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            /* Custom styles for the radio button */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #007bff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Food Recommendations</h1>
+
+        <h2 class="mt-4">Recommended Foods:</h2>
+        <form method="post" action="{{ url_for('recipe_detail') }}">
+            {% if recipe_list %}
+                {% for recipe in recipe_list %}
+                    <div class="food-box">
+                        <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="img-fluid">
+                        <br>
+                        <strong>{{ recipe.title }}</strong>
+                        <br>
+                        Calories: {{ recipe.calories }}
+                        <br>
+                        <label>
+                            <input type="radio" name="selected_recipe" value="{{ recipe.id }}" required>
+                            <span class="ml-2">Select Recipe</span>
+                        </label>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <input type="submit" value="View Details" class="btn btn-primary">
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js CDN (required for Bootstrap components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
