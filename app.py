@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-api_key_spoonacular = "9747cbf38a3b4fa497c9cf9976d17156"
+api_key_spoonacular = "your_spoonacular_api"
 
 app.config['SPOONACULAR_URL'] = "https://api.spoonacular.com/recipes/findByNutrients"
 
